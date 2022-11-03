@@ -8,10 +8,7 @@ let box = document.getElementById("boxe");
 box.appendChild(displayCount)
 let result = document.getElementById("displaying")
 let dropdown = document.getElementById("dropdown")
- 
     
-    
-let filteredObj;
 
 setup(allEpisodes)
 searchBar.addEventListener("keyup", (e) => {
@@ -21,7 +18,8 @@ searchBar.addEventListener("keyup", (e) => {
   let filteredObj = allEps.filter(val => {
     return val.name.toLowerCase().includes(searchValue)
   })
-  result.innerText = `Displaying ${filteredObj.length}/${allEpisodes.length}`
+  result.innerText = filteredObj.length == 0 ? "Sorry, there is no result :("
+  :`Displaying ${filteredObj.length}/${allEpisodes.length}`
   setup(filteredObj)
 })
   
@@ -32,13 +30,14 @@ for(let i in eps){
   let episode = eps[i].number>9?`${eps[i].number}`:`0${eps[i].number}`
   let card = `
   
-  <div class="card" style="width: 18rem;" id="${i}">
-     <img class="card-img-top border" src="${eps[i].image.medium}" alt="Card image cap">
+  <div class="card rounded-3" style="width: 18rem;" id="${i}">
+     <img class="card-img-top rounded" src="${eps[i].image.medium}" alt="Card image cap">
      <div class="card-title text-center border">
-     <h5 class="card-header">${eps[i].name} - S${season}E${episode}</h5>
+     <h5 class="card-header bg-danger text-light">${eps[i].name} - S${season}E${episode}</h5>
      </div>
-     <div class="card-text p-2">
-       ${eps[i].summary}
+     
+     <div class="card-text p-3">
+      ${eps[i].summary}
      </div>
    </div>
    `
