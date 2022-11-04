@@ -45,9 +45,14 @@ for(let i in eps){
    let option = `<a class="dropdown-item itemFound" name="${i}" href="#" onclick="itemFounder(event)">${eps[i].name}</a>`
    dropdown.insertAdjacentHTML("beforeend",option)
    container.insertAdjacentHTML("beforeend",card)
-  
-   
 }
+   let input = searchBar.value;
+   
+   let summ = document.getElementsByClassName("card-text")
+   console.log(summ[0])
+   if(input !== ""){
+  summ.innerHTML = summ.textContent.replaceAll(input,`<mark>${input}</mark>`)
+   }
 }
 
 
@@ -56,3 +61,4 @@ function itemFounder(e){
   console.log(getId)
   e.target.setAttribute("href", `#${getId}`)
  }
+
