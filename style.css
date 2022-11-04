@@ -12,3 +12,7 @@
   max-height: 280px;
   overflow-y: auto;
 }
+
+mark {
+  background:yellow;
+}

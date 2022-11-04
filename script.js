@@ -9,7 +9,7 @@ box.appendChild(displayCount)
 let result = document.getElementById("displaying")
 let dropdown = document.getElementById("dropdown")
     
-
+let filteredObj;
 setup(allEpisodes)
 searchBar.addEventListener("keyup", (e) => {
   container.innerHTML = ""
@@ -59,14 +59,30 @@ for(let i in eps){
       titl[i].innerHTML = titl[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
      }
    }
-   console.log(summ.innerHTML)
+   
    
 }
 
 
 function itemFounder(e){
+  container.innerHTML =""
+  setup(allEpisodes)
   let getId = e.target.name;
-  console.log(getId)
   e.target.setAttribute("href", `#${getId}`)
+  let input = e.target.innerText;
+   
+   let summ = document.getElementsByClassName("card-text")
+   let titl = document.getElementsByClassName("card-header")
+   let exp = new RegExp(input , "gi")
+ 
+   for(let i in summ){
+    
+    if(input !== ""){
+      
+      summ[i].innerHTML = summ[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
+      titl[i].innerHTML = titl[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
+     }
+   }
+  
  }
 
