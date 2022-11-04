@@ -49,10 +49,18 @@ for(let i in eps){
    let input = searchBar.value;
    
    let summ = document.getElementsByClassName("card-text")
-   console.log(summ[0])
-   if(input !== ""){
-  summ.innerHTML = summ.textContent.replaceAll(input,`<mark>${input}</mark>`)
+   let titl = document.getElementsByClassName("card-header")
+   let exp = new RegExp(input , "gi")
+   
+   for(let i in summ){
+    if(input !== ""){
+      
+      summ[i].innerHTML = summ[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
+      titl[i].innerHTML = titl[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
+     }
    }
+   console.log(summ.innerHTML)
+   
 }
 
 
