@@ -47,22 +47,19 @@ for(let i in eps){
    container.insertAdjacentHTML("beforeend",card)
 }
    let input = searchBar.value;
-   
+   console.log(input)
    let summ = document.getElementsByClassName("card-text")
    let titl = document.getElementsByClassName("card-header")
    let exp = new RegExp(input , "gi")
    
    for(let i in summ){
-    if(input !== ""){
+    if(input !== "" && input.length>2){
       
       summ[i].innerHTML = summ[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
       titl[i].innerHTML = titl[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
      }
    }
-   
-   
 }
-
 
 function itemFounder(e){
   container.innerHTML =""
@@ -83,6 +80,5 @@ function itemFounder(e){
       titl[i].innerHTML = titl[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
      }
    }
-  
  }
 
