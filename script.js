@@ -9,20 +9,37 @@ box.appendChild(displayCount)
 let result = document.getElementById("displaying")
 let dropdown = document.getElementById("dropdown")
 let dropdown2 = document.getElementById("dropdown2")
-    
+let children = container.children;
 let card;
 setup(allShows)
-// searchBar.addEventListener("keyup", (e) => {
-//   container.innerHTML = ""
-//   let searchValue = e.target.value.toLowerCase();
-//   let allEps = getAllEpisodes();
-//   let filteredObj = allEps.filter(val => {
-//     return val.name.toLowerCase().includes(searchValue)
-//   })
-//   result.innerText = filteredObj.length == 0 ? "Sorry, there is no result :("
-//   :`Displaying ${filteredObj.length}/${allEpisodes.length}`
-//   setup(filteredObj)
-// })
+searchBar.addEventListener("keyup", (e)=>{
+  container.innerHTML = ""
+  let searchValue = e.target.value.toLowerCase();
+  
+  children = children.filter((val,index) => {
+    return val[index].innerText.toLowerCase().includes(searchValue)
+  })
+  console.log(children)
+
+})
+
+console.log(children)
+
+
+        //  searchBar.addEventListener("keyup", (e) => {
+         
+        //  let searchValue = e.target.value.toLowerCase();
+  
+        //  let filteredObj = eps.filter(val => {
+        //  return val.name.toLowerCase().includes(searchValue)
+        //  })
+        //  result.innerText = filteredObj.length == 0 ? "Sorry, there is no result :("
+        //  :`Displaying ${filteredObj.length}/${eps.length}`
+  
+        //   makePageForEpisodes(eps)
+        //  })
+
+
   
 // Show dropdown elements
 function setup(eps) {
@@ -35,7 +52,7 @@ for(let i in eps){
   }
   let card = `
   
-  <div class="card rounded-3 col-md-6"  id="${i}">
+  <div class="card rounded-3 col-md-6 p-0"  id="${i}">
      <img class="card-img-top rounded heights" src="${img.medium}" alt="Card image cap">
      <div class="card-title text-center border">
      <h5 class="card-header bg-danger text-light">${eps[i].name}</h5>
@@ -51,24 +68,14 @@ for(let i in eps){
    dropdown.insertAdjacentHTML("beforeend",option)
    container.insertAdjacentHTML("beforeend",card)
 }
-   let input = searchBar.value;
-   console.log(input)
-   let summ = document.getElementsByClassName("card-text")
-   let titl = document.getElementsByClassName("card-header")
-   let exp = new RegExp(input , "gi")
    
-   for(let i in summ){
-    if(input !== "" && input.length>2){
-      
-      summ[i].innerHTML = summ[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
-      titl[i].innerHTML = titl[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
-     }
-   }
+   
 }
 // Show episodes
 
 function makePageForEpisodes(eps) {
   container.innerHTML = ""
+  dropdown2.innerHTML = ""
     for(let i in eps){
       // let season = eps[i].season>9?`${eps[i].season}`:`0${eps[i].season}`
       // let episode = eps[i].number>9?`${eps[i].number}`:`0${eps[i].number}`
@@ -78,13 +85,13 @@ function makePageForEpisodes(eps) {
       }
       let card = `
       
-      <div class="card rounded-3 col-md-6"  id="${i}">
+      <div class="card rounded-3 col-md-6 p-0"  id="${i}">
          <img class="card-img-top rounded heights" src="${img.medium}" alt="Card image cap">
          <div class="card-title text-center border">
-         <h5 class="card-header bg-danger text-light">${eps[i].name}</h5>
+         <h5 class="card-header markup bg-danger text-light">${eps[i].name}</h5>
          </div>
          
-         <div class="card-text p-3">
+         <div class="card-text markup p-3">
           ${eps[i].summary}
          </div>
        </div>
@@ -92,22 +99,9 @@ function makePageForEpisodes(eps) {
     
        let option = `<a class="dropdown-item itemFound" name="${i}">${eps[i].name}</a>`
        dropdown2.insertAdjacentHTML("beforeend",option)
-       
        container.insertAdjacentHTML("beforeend",card)
+
     }
-       let input = searchBar.value;
-       console.log(input)
-       let summ = document.getElementsByClassName("card-text")
-       let titl = document.getElementsByClassName("card-header")
-       let exp = new RegExp(input , "gi")
-       
-       for(let i in summ){
-        if(input !== "" && input.length>2){
-          
-          summ[i].innerHTML = summ[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
-          titl[i].innerHTML = titl[i].innerHTML.replaceAll(exp,match => `<mark>${match}</mark>`)
-         }
-       }
     
 }
 
@@ -126,12 +120,26 @@ fetch(url)
     })}
 
     dropdown.addEventListener('click',(e)=>{
-      console.log("asdasdasd")
       
         let showid=e.target.id;
-        console.log(showid)
         getfetch(showid)
       
+     })
+
+     dropdown2.addEventListener("click", (e)=>{
+      let getId = e.target.name;
+      e.target.setAttribute("href", `#${getId}`)
+      let summ = document.getElementsByClassName("markup")
+      
+      let input = e.target.innerText;
+      let exp = new RegExp(input , "gi")
+      
+     for(let i in summ){
+      if(input !== ""){
+      summ[i].innerHTML = summ[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
+      
+     }
+   }
      })
 // function itemFounder(e){
 //   container.innerHTML =""
