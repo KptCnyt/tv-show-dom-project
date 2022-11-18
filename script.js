@@ -9,36 +9,8 @@ box.appendChild(displayCount)
 let result = document.getElementById("displaying")
 let dropdown = document.getElementById("dropdown")
 let dropdown2 = document.getElementById("dropdown2")
-let children = container.children;
 let card;
-setup(allShows)
-searchBar.addEventListener("keyup", (e)=>{
-  container.innerHTML = ""
-  let searchValue = e.target.value.toLowerCase();
-  
-  children = children.filter((val,index) => {
-    return val[index].innerText.toLowerCase().includes(searchValue)
-  })
-  console.log(children)
-
-})
-
-console.log(children)
-
-
-        //  searchBar.addEventListener("keyup", (e) => {
-         
-        //  let searchValue = e.target.value.toLowerCase();
-  
-        //  let filteredObj = eps.filter(val => {
-        //  return val.name.toLowerCase().includes(searchValue)
-        //  })
-        //  result.innerText = filteredObj.length == 0 ? "Sorry, there is no result :("
-        //  :`Displaying ${filteredObj.length}/${eps.length}`
-  
-        //   makePageForEpisodes(eps)
-        //  })
-
+setup(allShows);
 
   
 // Show dropdown elements
@@ -104,7 +76,7 @@ function makePageForEpisodes(eps) {
     }
     
 }
-
+let elements = []
 //EpisodeDropdown
 function getfetch(showid){
   let url=`https://api.tvmaze.com/shows/${showid}/episodes`
@@ -116,6 +88,7 @@ fetch(url)
   // Do something with the JSON
   .then((response) => {
     makePageForEpisodes(response)
+    elements.push(response)
 
     })}
 
