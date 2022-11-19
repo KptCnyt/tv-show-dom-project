@@ -88,15 +88,17 @@ fetch(url)
   // Do something with the JSON
   .then((response) => {
     makePageForEpisodes(response)
-    let input=document.getElementById('searchinput')
+    let input=document.getElementById('searchBar')
     input.addEventListener('keyup',(event)=>{
-   let episodes=response
-   const searchValue=event.target.value
-    const filteredepisodes=episodes.filter(episode=>{return (episode.name.toLowerCase().includes(searchValue.toLowerCase())||episode.summary.toLowerCase().includes(searchValue.toLowerCase()))
+    let episodes=response
+    const searchValue=event.target.value
+    const filteredepisodes=episodes.filter(episode=>{
+    return (episode.name.toLowerCase().includes(searchValue.toLowerCase()) 
+    || episode.summary.toLowerCase().includes(searchValue.toLowerCase()))
 
    })
    let spanEl=document.getElementById('count-epispde')
-    spanEl.innerText=filteredepisodes.length +' / '+ episodes.length
+    spanEl.innerText=`Displaying ${filteredepisodes.length} / ${episodes.length}`
     makePageForEpisodes(filteredepisodes)
 
   })
@@ -125,26 +127,6 @@ fetch(url)
      }
    }
      })
-// function itemFounder(e){
-//   container.innerHTML =""
-//   setup(allEpisodes)
-//   let getId = e.target.name;
-//   e.target.setAttribute("href", `#${getId}`)
-//   let input = e.target.innerText;
-   
-//    let summ = document.getElementsByClassName("card-text")
-//    let titl = document.getElementsByClassName("card-header")
-//    let exp = new RegExp(input , "gi")
- 
-//    for(let i in summ){
-    
-//     if(input !== ""){
-      
-//       summ[i].innerHTML = summ[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
-//       titl[i].innerHTML = titl[i].innerHTML.replace(exp,match => `<mark>${match}</mark>`)
-//      }
-//    }
-//  }
 
  function topFunction() {
   document.body.scrollTop = 0;
