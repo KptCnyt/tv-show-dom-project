@@ -44,5 +44,14 @@ mark {
   background-color: #555;
 }
 .heights {
+  width: 300px;
+}
+.widths {
   height: 300px;
+}
+
+.direction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

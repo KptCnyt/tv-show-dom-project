@@ -9,23 +9,44 @@ box.appendChild(displayCount)
 let result = document.getElementById("displaying")
 let dropdown = document.getElementById("dropdown")
 let dropdown2 = document.getElementById("dropdown2")
-let card;
+
 setup(allShows);
 
+
+    searchBar.addEventListener('keyup',(event)=>{
+    container.innerHTML = ""
+    const searchValue=event.target.value
+    const filteredepisodes=allShows.filter(show=>{
+    return (show.name.toLowerCase().includes(searchValue.toLowerCase()) 
+    || show.summary.toLowerCase().includes(searchValue.toLowerCase()))
+
+   })
+   let spanEl=document.getElementById('count-epispde')
+    spanEl.innerText=`Displaying ${filteredepisodes.length} / ${allShows.length}`
+    setup(filteredepisodes)
+
+  })
   
 // Show dropdown elements
 function setup(eps) {
 for(let i in eps){
-  // let season = eps[i].season>9?`${eps[i].season}`:`0${eps[i].season}`
-  // let episode = eps[i].number>9?`${eps[i].number}`:`0${eps[i].number}`
   let img = eps[i].image
   if(img == null){
     img = ""
   }
   let card = `
   
-  <div class="card rounded-3 col-md-6 p-0"  id="${i}">
-     <img class="card-img-top rounded heights" src="${img.medium}" alt="Card image cap">
+  <div class="card rounded-3 col-md-12 p-0"  id="${i}">
+     <div style="display:flex">
+     <img class=" rounded heights" src="${img.medium}" alt="Card image cap">
+     <div class="direction ml-5">
+     <h3>Language : ${eps[i].language}</h3>
+     <h3>Rating : ${eps[i].rating.average}</h3>
+     <h3>Genres : ${eps[i].genres}</h3>
+     <h3>Status : ${eps[i].status}</h3>
+     </div>
+     </div>
+     
      <div class="card-title text-center border">
      <h5 class="card-header bg-danger text-light">${eps[i].name}</h5>
      </div>
@@ -49,8 +70,8 @@ function makePageForEpisodes(eps) {
   container.innerHTML = ""
   dropdown2.innerHTML = ""
     for(let i in eps){
-      // let season = eps[i].season>9?`${eps[i].season}`:`0${eps[i].season}`
-      // let episode = eps[i].number>9?`${eps[i].number}`:`0${eps[i].number}`
+      let season = eps[i].season>9?`${eps[i].season}`:`0${eps[i].season}`
+      let episode = eps[i].number>9?`${eps[i].number}`:`0${eps[i].number}`
       let img = eps[i].image
       if(img == null){
         img = ""
@@ -58,9 +79,9 @@ function makePageForEpisodes(eps) {
       let card = `
       
       <div class="card rounded-3 col-md-6 p-0"  id="${i}">
-         <img class="card-img-top rounded heights" src="${img.medium}" alt="Card image cap">
+         <img class="card-img-top rounded widths" src="${img.medium}" alt="Card image cap">
          <div class="card-title text-center border">
-         <h5 class="card-header markup bg-danger text-light">${eps[i].name}</h5>
+         <h5 class="card-header markup bg-danger text-light">${eps[i].name} - S${season}-E${episode}</h5>
          </div>
          
          <div class="card-text markup p-3">
@@ -69,7 +90,7 @@ function makePageForEpisodes(eps) {
        </div>
        `
     
-       let option = `<a class="dropdown-item itemFound" name="${i}">${eps[i].name}</a>`
+       let option = `<a class="dropdown-item itemFound" name="${i}">S${season}-E${episode} - ${eps[i].name} - ${eps[i].name}</a>`
        dropdown2.insertAdjacentHTML("beforeend",option)
        container.insertAdjacentHTML("beforeend",card)
 
