@@ -10,7 +10,7 @@ h5 {
 }
 
 .card {
-
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   margin: 20px
 }
 
@@ -54,4 +54,13 @@ mark {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 30px;
+}
+@media (max-width:800px){
+  .sizing {
+      font-size: 20px;
+  }
+  .direction{
+    margin-left: 5px;
+  }
 }
