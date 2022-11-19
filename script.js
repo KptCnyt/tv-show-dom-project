@@ -76,7 +76,7 @@ function makePageForEpisodes(eps) {
     }
     
 }
-let elements = []
+
 //EpisodeDropdown
 function getfetch(showid){
   let url=`https://api.tvmaze.com/shows/${showid}/episodes`
@@ -88,7 +88,18 @@ fetch(url)
   // Do something with the JSON
   .then((response) => {
     makePageForEpisodes(response)
-    elements.push(response)
+    let input=document.getElementById('searchinput')
+    input.addEventListener('keyup',(event)=>{
+   let episodes=response
+   const searchValue=event.target.value
+    const filteredepisodes=episodes.filter(episode=>{return (episode.name.toLowerCase().includes(searchValue.toLowerCase())||episode.summary.toLowerCase().includes(searchValue.toLowerCase()))
+
+   })
+   let spanEl=document.getElementById('count-epispde')
+    spanEl.innerText=filteredepisodes.length +' / '+ episodes.length
+    makePageForEpisodes(filteredepisodes)
+
+  })
 
     })}
 
